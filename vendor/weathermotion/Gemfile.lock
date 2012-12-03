@@ -1,0 +1,16 @@
+PATH
+  remote: .
+  specs:
+    weathermotion (0.0.1)
+      bubble-wrap (~> 1.1.4)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    bubble-wrap (1.1.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  weathermotion!
