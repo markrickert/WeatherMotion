@@ -12,3 +12,6 @@ nbproject
 *~
 *.sw[po]
 .eprj
+
+*/build-*
+*.bridgesupport
