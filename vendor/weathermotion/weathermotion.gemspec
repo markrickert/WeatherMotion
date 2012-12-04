@@ -14,5 +14,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = WeatherMotion::VERSION
 
-  gem.add_dependency 'bubble-wrap', '~> 1.1.4'
+  # gem.add_dependency 'bubble-wrap', '~> 1.1.4'
 end

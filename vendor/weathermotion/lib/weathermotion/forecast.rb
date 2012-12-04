@@ -20,7 +20,7 @@ class WeatherMotion::Forecast
 
   def initialize (payload)
     @day = payload['day']
-    @date = WeatherMotion._parse_time(payload['date'])
+    @date = WeatherMotion::Time.parse(payload['date'])
     @low = payload['low'].to_i
     @high = payload['high'].to_i
     @text = payload['text']

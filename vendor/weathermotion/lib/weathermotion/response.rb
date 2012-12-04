@@ -57,33 +57,30 @@ class WeatherMotion::Response
 
   def initialize (request_location, request_url, doc)
     # save off the request params
-    @request_location = request_location
-    @request_url = request_url
+    #@request_location = request_location
+    #@request_url = request_url
 
     # parse the nokogiri xml document to gather response data
     puts "Got to the initialization function."
-    puts doc.valueForKeyPath('rss.channel')
-    puts doc.valueForKeyPath('rss.channel').inspect
+    root = doc[:channel]
+    puts root
+    @astronomy = WeatherMotion::Astronomy.new(root['yweather:astronomy'])
+    @location = WeatherMotion::Location.new(root['yweather:location'])
+    @units = WeatherMotion::Units.new(root['yweather:units'])
+    @wind = WeatherMotion::Wind.new(root['yweather:wind'])
+    @atmosphere = WeatherMotion::Atmosphere.new(root['yweather:atmosphere'])
+    @image = WeatherMotion::Image.new(root[:image])
 
-    root = doc.valueForKeyPath('rss.channel').first
-
-    @astronomy = WeatherMotion::Astronomy.new(root.valueForKey('yweather:astronomy').first)
-    @location = WeatherMotion::Location.new(root.valueForKey('yweather:location').first)
-    @units = WeatherMotion::Units.new(root.valueForKey('yweather:units').first)
-    @wind = WeatherMotion::Wind.new(root.valueForKey('yweather:wind').first)
-    @atmosphere = WeatherMotion::Atmosphere.new(root.valueForKey('yweather:atmosphere').first)
-    @image = WeatherMotion::Image.new(root.valueForKey('image').first)
-
-    item = root.valueForKey('item').first
-    @condition = WeatherMotion::Condition.
-      new(item.valueForKey('yweather:condition').first)
+    item = root[:item]
+    @condition = WeatherMotion::Condition.new(item['yweather:condition'])
     @forecasts = []
-    item.valueForKey('yweather:forecast').each { |forecast| 
-      @forecasts << WeatherMotion::Forecast.new(forecast) }
-    @latitude = item.valueForKey('geo:lat').first.content.to_f
-    @longitude = item.valueForKey('geo:long').first.content.to_f
-    @page_url = item.valueForKey('link').first.content
-    @title = item.valueForKey('title').first.content
-    @description = item.valueForKey('description').first.content
+    item['yweather:forecast'].each { |forecast| 
+      @forecasts << WeatherMotion::Forecast.new(forecast)
+    }
+    @latitude = item['geo:lat'].to_f
+    @longitude = item['geo:long'].to_f
+    @page_url = item[:link].to_s
+    @title = item[:title].to_s
+    @description = item[:description].to_s
   end
 end

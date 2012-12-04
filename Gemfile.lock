@@ -2,12 +2,10 @@ PATH
   remote: vendor/weathermotion
   specs:
     weathermotion (0.0.1)
-      bubble-wrap (~> 1.1.4)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    bubble-wrap (1.1.4)
     rake (10.0.2)
 
 PLATFORMS

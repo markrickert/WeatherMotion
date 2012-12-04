@@ -1,4 +1,5 @@
 module WeatherMotion
+
 	# The main client object through which the Yahoo! Weather service may be accessed.
 	class Client
 	  # the url with which we obtain weather information from yahoo
@@ -57,42 +58,16 @@ module WeatherMotion
 	    def _lookup (src, url)
 			puts "Getting URL: #{url}"
 
-			request = lambda {
-				puts "response = #{@r}"
-				puts "response.body = #{@r.body.to_str rescue ''}"
-				puts "response.error_message = #{@r.error_message}"
-				puts "response.status_code = #{@r.status_code.to_s rescue ''}"
-				puts "response ok = #{@r.ok?}"
-				puts "response.status_code = #{@r.status_code.to_s}"
-				puts "response.status_description = #{@r.status_description}"
-				doc = NSDictionary.dictionaryWithXMLString(@r.body.to_str)
-				puts "Doc: #{doc}"
-				response = WeatherMotion::Response.new(src, url, doc)
-				puts "Response: #{response}"
-				return response
-			}
-
-			BW::HTTP.get(url) do |response|
-				@r = response
-				return request.call
-  				# if response.ok?
-					# create the response object
-					# puts "Response"
-					# puts response.body
-					# puts response.inspect
-					# doc = NSDictionary.dictionaryWithXMLString(response.body.to_str)
-					# puts "Doc: #{doc}"
-					# puts doc.inspect
-					# WeatherMotion::Response.new(src, url, doc)
-				# else
-			    #    raise RuntimeError.new("failed to get weather [src=#{src}, url=#{url}, e=#{e}].")
-				# end
-			end
+			data = NSMutableData.dataWithContentsOfURL(NSURL.URLWithString(url))
+			doc = NSDictionary.dictionaryWithXMLData(data)
+			puts doc
+			WeatherMotion::Response.new(src, url, doc)
 	    end
 
       # Excape strings... stolen from BubbleWrap since it's a private method.
       def escape(string)
         if string
+          puts "Escaping String: #{string}"
           CFURLCreateStringByAddingPercentEscapes nil, string.to_s, "[]", ";=&,", KCFStringEncodingUTF8
         end
       end

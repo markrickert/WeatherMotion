@@ -13,7 +13,7 @@ class WeatherMotion::Condition
 
   def initialize (payload)
     @code = payload['code'].to_i
-    @date = WeatherMotion._parse_time(payload['date'])
+    @date = WeatherMotion::Time.parse(payload['date'])
     @temp = payload['temp'].to_i
     @text = payload['text']
   end

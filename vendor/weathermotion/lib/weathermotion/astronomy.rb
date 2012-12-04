@@ -7,7 +7,7 @@ class WeatherMotion::Astronomy
   attr_reader :sunset
 
   def initialize (payload)
-    @sunrise = WeatherMotion._parse_time(payload['sunrise'])
-    @sunset = WeatherMotion._parse_time(payload['sunset'])
+    @sunrise = WeatherMotion::Time.parse(payload['sunrise'])
+    @sunset = WeatherMotion::Time.parse(payload['sunset'])
   end
 end

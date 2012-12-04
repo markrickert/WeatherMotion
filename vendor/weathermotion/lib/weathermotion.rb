@@ -1,6 +1,5 @@
 require "weathermotion/version" unless defined?(WeatherMotion::VERSION)
 require "weathermotion/client"
-require 'bubble-wrap/http' 
 
 unless defined?(Motion::Project::Config)
   raise "This file must be required within a RubyMotion project Rakefile."
