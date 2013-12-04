@@ -4,7 +4,7 @@ PATH
     weathermotion (0.0.1)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://www.rubygems.org/
   specs:
     rake (10.0.2)
 

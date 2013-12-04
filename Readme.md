@@ -4,6 +4,6 @@ A port of [Yahoo's Weather Ruby Gem](https://github.com/shaper/yahoo-weather) to
 
 Current status
 ---
-Not Complete. Has critical bugs at runtime.
+Not Complete.
 
-Please feel free to help me get everything working by forking and sending apull request! :)
+Please feel free to help me get everything working and tested by forking and sending a pull request! :)
